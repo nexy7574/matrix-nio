@@ -28,7 +28,7 @@ author = "Damir Jelić, Paarth Shah"
 # The short X.Y version
 version = ""
 # The full version, including alpha/beta/rc tags
-release = "0.24.0"
+release = "0.25.0rc3"
 
 
 # -- General configuration ---------------------------------------------------
@@ -51,6 +51,7 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
     "m2r2",
+    "sphinx_autodoc_typehints",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
