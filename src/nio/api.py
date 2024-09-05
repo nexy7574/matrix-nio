@@ -54,7 +54,7 @@ except ImportError:
 
 MATRIX_API_PATH_V1: str = "/_matrix/client/v1"
 MATRIX_API_PATH_V3: str = "/_matrix/client/v3"
-MATRIX_MEDIA_API_PATH: str = "/_matrix/media/v3"
+MATRIX_LEGACY_MEDIA_API_PATH: str = "/_matrix/media/v3"
 
 _FilterT = Union[None, str, Dict[Any, Any]]
 
@@ -206,7 +206,8 @@ class Api:
         parsed_homeserver = urlparse(homeserver) if homeserver else None
 
         http_url = (
-            f"{homeserver}{MATRIX_MEDIA_API_PATH}/download/" "{server_name}{mediaId}"
+            f"{homeserver}{MATRIX_LEGACY_MEDIA_API_PATH}/download/"
+            "{server_name}{mediaId}"
         ).format(
             homeserver=(
                 parsed_homeserver.geturl()
@@ -267,7 +268,8 @@ class Api:
         )
 
         plumb_url = (
-            f"{homeserver}{MATRIX_MEDIA_API_PATH}/download/" "{server_name}{mediaId}"
+            f"{homeserver}{MATRIX_LEGACY_MEDIA_API_PATH}/download/"
+            "{server_name}{mediaId}"
         ).format(
             homeserver=host or f"emxc://{url.netloc}",
             server_name=url.hostname,
@@ -1567,7 +1569,9 @@ class Api:
         query_parameters = {"access_token": access_token}
         path = ["config"]
 
-        return "GET", Api._build_path(path, query_parameters, MATRIX_MEDIA_API_PATH)
+        return "GET", Api._build_path(
+            path, query_parameters, MATRIX_LEGACY_MEDIA_API_PATH
+        )
 
     @staticmethod
     def upload(
@@ -1592,7 +1596,9 @@ class Api:
         if filename:
             query_parameters["filename"] = filename
 
-        return "POST", Api._build_path(path, query_parameters, MATRIX_MEDIA_API_PATH)
+        return "POST", Api._build_path(
+            path, query_parameters, MATRIX_LEGACY_MEDIA_API_PATH
+        )
 
     @staticmethod
     def download(
@@ -1626,7 +1632,9 @@ class Api:
             end = filename
         path = ["download", server_name, media_id, end]
 
-        return "GET", Api._build_path(path, query_parameters, MATRIX_MEDIA_API_PATH)
+        return "GET", Api._build_path(
+            path, query_parameters, MATRIX_LEGACY_MEDIA_API_PATH
+        )
 
     @staticmethod
     def thumbnail(
@@ -1662,7 +1670,9 @@ class Api:
         }
         path = ["thumbnail", server_name, media_id]
 
-        return "GET", Api._build_path(path, query_parameters, MATRIX_MEDIA_API_PATH)
+        return "GET", Api._build_path(
+            path, query_parameters, MATRIX_LEGACY_MEDIA_API_PATH
+        )
 
     @staticmethod
     def profile_get(

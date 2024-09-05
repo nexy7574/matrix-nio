@@ -131,7 +131,7 @@ from nio import (
 from nio.api import (
     MATRIX_API_PATH_V1,
     MATRIX_API_PATH_V3,
-    MATRIX_MEDIA_API_PATH,
+    MATRIX_LEGACY_MEDIA_API_PATH,
     EventFormat,
     RelationshipType,
     ResizingMethod,
@@ -145,7 +145,7 @@ from nio.responses import PublicRoom, PublicRoomsResponse
 
 BASE_URL_V1 = f"https://example.org{MATRIX_API_PATH_V1}"
 BASE_URL_V3 = f"https://example.org{MATRIX_API_PATH_V3}"
-BASE_MEDIA_URL = f"https://example.org{MATRIX_MEDIA_API_PATH}"
+BASE_MEDIA_URL = f"https://example.org{MATRIX_LEGACY_MEDIA_API_PATH}"
 TEST_ROOM_ID = "!testroom:example.org"
 
 ALICE_ID = "@alice:example.org"
@@ -415,7 +415,7 @@ class TestClass:
 
     async def test_mxc_to_http(self, unauthed_async_client):
         mxc = "mxc://privacytools.io/123foo"
-        url_path = f"{MATRIX_MEDIA_API_PATH}/download/privacytools.io/123foo"
+        url_path = f"{MATRIX_LEGACY_MEDIA_API_PATH}/download/privacytools.io/123foo"
 
         unauthed_async_client.homeserver = "https://chat.privacytools.io"
         expected = f"{unauthed_async_client.homeserver}{url_path}"
