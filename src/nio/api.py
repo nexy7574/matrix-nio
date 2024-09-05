@@ -55,6 +55,7 @@ except ImportError:
 MATRIX_API_PATH_V1: str = "/_matrix/client/v1"
 MATRIX_API_PATH_V3: str = "/_matrix/client/v3"
 MATRIX_LEGACY_MEDIA_API_PATH: str = "/_matrix/media/v3"
+MATRIX_AUTHENTICATED_MEDIA_API_PATH: str = MATRIX_API_PATH_V1 + "/media/download"
 
 _FilterT = Union[None, str, Dict[Any, Any]]
 
@@ -206,7 +207,7 @@ class Api:
         parsed_homeserver = urlparse(homeserver) if homeserver else None
 
         http_url = (
-            f"{homeserver}{MATRIX_LEGACY_MEDIA_API_PATH}/download/"
+            f"{homeserver}{MATRIX_AUTHENTICATED_MEDIA_API_PATH}/"
             "{server_name}{mediaId}"
         ).format(
             homeserver=(
@@ -268,7 +269,7 @@ class Api:
         )
 
         plumb_url = (
-            f"{homeserver}{MATRIX_LEGACY_MEDIA_API_PATH}/download/"
+            f"{homeserver}{MATRIX_AUTHENTICATED_MEDIA_API_PATH}/"
             "{server_name}{mediaId}"
         ).format(
             homeserver=host or f"emxc://{url.netloc}",
